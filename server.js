@@ -12,10 +12,11 @@ app.use(express.json())
 const mysql=require('mysql2')
 
 const pool=mysql.createPool({
-    host: process.env.HOST,
-    user: process.env.USER,
-    password:process.env.PASSWORD,
-    database:process.env.DATABASE
+  host: process.env.MYSQLHOST,
+  user: process.env.MYSQLUSER,
+  password: process.env.MYSQLPASSWORD,
+  database: process.env.MYSQLDATABASE,
+  port: process.env.MYSQLPORT
 }).promise()
 
 app.get('/get-all-products/:table',async(req,res)=>{
