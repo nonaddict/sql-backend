@@ -81,7 +81,9 @@ app.post('/draw-products/:limit/:keyword/:table', async (req, res) => {
         return res.status(403).json({ success: false, data: "Invalid table name" });
     }
 
-    const rawJson = await fetch(`https://api.ebay.com/buy/browse/v1/item_summary/search?q=${keyword}&limit=${limit}`, {
+
+    const filter = encodeURIComponent('buyerReviews.rating>=4 AND buyerReviews.count>=20');
+    const rawJson = await fetch(`https://api.ebay.com/buy/browse/v1/item_summary/search?q=${keyword}&limit=${limit}&filter=${filter}`, {
       headers: {
         'authorization': 'Bearer ' + token,
         'content-type': 'application/json'
